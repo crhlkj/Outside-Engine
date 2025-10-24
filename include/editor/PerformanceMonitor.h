@@ -10,16 +10,10 @@ class PerformanceMonitor
 {
 private:
     float fps;
-    float frameTime;
-    int frameCount;
     double lastTime;
-    float averageFPS;
-    float minFPS;
-    float maxFPS;
 
 public:
     PerformanceMonitor();
-    void Init();
     void Update();
     void Render();
     float getFPS();
