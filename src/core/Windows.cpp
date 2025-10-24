@@ -3,8 +3,10 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "../../libs/stb_image.h"
 
-Windows::Windows() : imguiRender() {
-    if (!glfwInit()) {
+Windows::Windows() : imguiRender()
+{
+    if (!glfwInit())
+    {
         std::cerr << "Error: Could not initialize GLFW" << std::endl;
         exit(EXIT_FAILURE);
     }
@@ -18,19 +20,23 @@ Windows::Windows() : imguiRender() {
 #endif
 }
 
-Windows::~Windows() {
+Windows::~Windows()
+{
     imguiRender.Shutdown();
-    if (window) {
+    if (window)
+    {
         glfwDestroyWindow(window);
     }
     glfwTerminate();
 }
 
-void Windows::setWindowIcon(GLFWwindow* window, const char* iconPath) {
+void Windows::setWindowIcon(GLFWwindow *window, const char *iconPath)
+{
     int width, height, channels;
-    unsigned char* data = stbi_load(iconPath, &width, &height, &channels, 4);
+    unsigned char *data = stbi_load(iconPath, &width, &height, &channels, 4);
 
-    if (data) {
+    if (data)
+    {
         GLFWimage images[1];
         images[0].width = width;
         images[0].height = height;
@@ -39,14 +45,18 @@ void Windows::setWindowIcon(GLFWwindow* window, const char* iconPath) {
         glfwSetWindowIcon(window, 1, images);
         stbi_image_free(data);
         std::cout << "Icon loaded successfully: " << iconPath << " (" << width << "x" << height << ")\n";
-    } else {
+    }
+    else
+    {
         std::cerr << "Failed to load icon: " << iconPath << '\n';
     }
 }
 
-void Windows::createWindow(int width, int height, const char *title) {
+void Windows::createWindow(int width, int height, const char *title)
+{
     this->window = glfwCreateWindow(width, height, title, nullptr, nullptr);
-    if (!this->window) {
+    if (!this->window)
+    {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         exit(EXIT_FAILURE);
@@ -57,7 +67,8 @@ void Windows::createWindow(int width, int height, const char *title) {
 
     setWindowIcon(this->window, "../../assets/logo_128x128.png");
 
-    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
+    {
         std::cerr << "Failed to initialize GLAD" << std::endl;
         exit(EXIT_FAILURE);
     }
@@ -70,11 +81,13 @@ void Windows::createWindow(int width, int height, const char *title) {
     glViewport(0, 0, width, height);
 }
 
-bool Windows::running() const {
+bool Windows::running() const
+{
     return !glfwWindowShouldClose(window);
 }
 
-void Windows::run_loop() {
+void Windows::run_loop()
+{
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glfwPollEvents();
@@ -87,6 +100,7 @@ void Windows::run_loop() {
     glfwSwapBuffers(window);
 }
 
-GLFWwindow *Windows::getWindow() const {
+GLFWwindow *Windows::getWindow() const
+{
     return window;
 }

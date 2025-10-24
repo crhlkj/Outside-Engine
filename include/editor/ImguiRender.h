@@ -5,17 +5,17 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-class ImguiRender {
+class ImguiRender
+{
 private:
-    GLFWwindow* window;
-    const char* glsl_version;
+    GLFWwindow *window;
+    const char *glsl_version;
 
 public:
-    bool Initialize(GLFWwindow* window);
+    bool Initialize(GLFWwindow *window);
     void BeginFrame();
     void Shutdown();
     void EndFrame();
 };
 
-
-#endif //OUTSIDE_IMGUIRENDER_H
+#endif // OUTSIDE_IMGUIRENDER_H

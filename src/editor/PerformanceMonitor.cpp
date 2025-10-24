@@ -1,6 +1,7 @@
 #include "../../include/editor/PerformanceMonitor.h"
 
-PerformanceMonitor::PerformanceMonitor() {
+PerformanceMonitor::PerformanceMonitor()
+{
     this->fps = 0.0f;
     this->frameTime = 0.0f;
     this->frameCount = 0;
@@ -10,7 +11,8 @@ PerformanceMonitor::PerformanceMonitor() {
     this->maxFPS = 0.0f;
 }
 
-void PerformanceMonitor::Init() {
+void PerformanceMonitor::Init()
+{
     this->frameCount = 0;
     this->lastTime = glfwGetTime();
     this->averageFPS = 0.0f;
@@ -18,7 +20,8 @@ void PerformanceMonitor::Init() {
     this->maxFPS = 0.0f;
 }
 
-void PerformanceMonitor::Update() {
+void PerformanceMonitor::Update()
+{
     double currentTime = glfwGetTime();
     frameTime = currentTime - lastTime;
     fps = 1.0f / frameTime;
@@ -26,21 +29,27 @@ void PerformanceMonitor::Update() {
 
     frameCount++;
 
-    if (fps < minFPS) {
+    if (fps < minFPS)
+    {
         minFPS = fps;
     }
-    if (fps > maxFPS) {
+    if (fps > maxFPS)
+    {
         maxFPS = fps;
     }
 
-    if (averageFPS == 0.0f) {
+    if (averageFPS == 0.0f)
+    {
         averageFPS = fps;
-    } else {
+    }
+    else
+    {
         averageFPS = 0.1f * fps + 0.9f * averageFPS;
     }
 }
 
-void PerformanceMonitor::Render() {
+void PerformanceMonitor::Render()
+{
     ImGui::Begin("Performance", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
     ImGui::Text("Average FPS: %.2f", averageFPS);
     ImGui::Text("Current FPS: %.2f", fps);
@@ -52,6 +61,7 @@ void PerformanceMonitor::Render() {
     ImGui::End();
 }
 
-float PerformanceMonitor::getFPS() {
+float PerformanceMonitor::getFPS()
+{
     return averageFPS;
 }

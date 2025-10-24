@@ -7,7 +7,8 @@
 #include "../editor/ImguiRender.h"
 #include "../editor/PerformanceMonitor.h"
 
-class Windows {
+class Windows
+{
 private:
     GLFWwindow *window{};
     ImguiRender imguiRender;
@@ -23,4 +24,4 @@ public:
     [[nodiscard]] GLFWwindow *getWindow() const;
 };
 
-#endif //OUTSIDE_WINDOWS_H
+#endif // OUTSIDE_WINDOWS_H

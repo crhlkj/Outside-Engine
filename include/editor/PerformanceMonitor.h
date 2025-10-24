@@ -6,7 +6,8 @@
 #include <imgui_impl_opengl3.h>
 #include <GLFW/glfw3.h>
 
-class PerformanceMonitor {
+class PerformanceMonitor
+{
 private:
     float fps;
     float frameTime;
@@ -24,4 +25,4 @@ public:
     float getFPS();
 };
 
-#endif //OUTSIDE_FPS_RENDERING_H
+#endif // OUTSIDE_FPS_RENDERING_H

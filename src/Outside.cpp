@@ -1,9 +1,11 @@
 #include <Outside.h>
 using namespace std;
 
-int main() {
+int main()
+{
     windows.createWindow(1280, 780, "Outside");
-    while (windows.running()) {
+    while (windows.running())
+    {
         windows.run_loop();
     }
     return 0;
