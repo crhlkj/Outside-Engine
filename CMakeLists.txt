@@ -9,6 +9,10 @@ add_subdirectory(libs)
 set(FILES_CORE
         src/core/Windows.cpp
         include/core/Windows.h
+        src/core/Rendering.cpp
+        include/core/Rendering.h
+        src/core/Shaders.cpp
+        include/core/Shaders.h
 )
 
 set(FILES_EDITOR

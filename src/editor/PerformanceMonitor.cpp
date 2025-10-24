@@ -17,7 +17,7 @@ void PerformanceMonitor::Update()
 void PerformanceMonitor::Render()
 {
     ImGui::Begin("Performance", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("FPS: %.2f", fps);
+    ImGui::Text("FPS on scene: %.2f", fps);
     ImGui::End();
 }
 
