@@ -6,11 +6,16 @@
 #include <glad/glad.h>
 #include "../editor/ImguiRender.h"
 #include "../editor/PerformanceMonitor.h"
+#include "../../include/core/Rendering.h"
+#include "../../include/core/Shaders.h"
 
 class Windows
 {
 private:
     GLFWwindow *window{};
+    Rendering rendering;
+    Shaders shaders;
+
     ImguiRender imguiRender;
     PerformanceMonitor fpsCounter;
 

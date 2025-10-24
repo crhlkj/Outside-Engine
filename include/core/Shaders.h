@@ -9,8 +9,8 @@
 class Shaders {
 private:
     GLuint vertexShader, fragmentShader;
-    GLuint ID;
     std::string vertexSource, fragmentSource;
+    GLuint ID;
 
 public:
     Shaders();

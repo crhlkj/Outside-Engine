@@ -79,6 +79,16 @@ void Windows::createWindow(int width, int height, const char *title)
     imguiRender.Initialize(this->window);
 
     glViewport(0, 0, width, height);
+
+    float triangleVertices[] = {
+        -0.5f, -0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+        0.0f, 0.5f, 0.0f
+    };
+    unsigned int triangleIndices[] = {0, 1, 2};
+
+    rendering.setupBuffers(triangleVertices, sizeof(triangleVertices),
+                          triangleIndices, sizeof(triangleIndices));
 }
 
 bool Windows::running() const
@@ -88,15 +98,19 @@ bool Windows::running() const
 
 void Windows::run_loop()
 {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    rendering.useShader(3);
 
     glfwPollEvents();
     fpsCounter.Update();
     imguiRender.BeginFrame();
+
     fpsCounter.Render();
     // ImGui::ShowDemoWindow(); // Show demo window ImGui
-    imguiRender.EndFrame();
 
+    imguiRender.EndFrame();
     glfwSwapBuffers(window);
 }
 
