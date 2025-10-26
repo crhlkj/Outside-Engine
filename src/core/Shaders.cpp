@@ -24,7 +24,7 @@ bool Shaders::loadShader(const std::string& pathFile, std::string& shaderSource)
     return true;
 }
 
-bool Shaders::compileShader(GLenum type, const std::string& shaderSource, GLuint& shaderID) {
+bool Shaders::compileShader(GLenum type, const std::string &shaderSource, GLuint &shaderID) {
     shaderID = glCreateShader(type);
     const char* src = shaderSource.c_str();
     glShaderSource(shaderID, 1, &src, nullptr);

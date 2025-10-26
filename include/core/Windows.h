@@ -22,7 +22,8 @@ private:
 public:
     Windows();
     ~Windows();
-    void setWindowIcon(GLFWwindow *window, const char *iconPath);
+
+    static void setWindowIcon(GLFWwindow *window, const char *iconPath);
     void createWindow(int width, int height, const char *title);
     [[nodiscard]] bool running() const;
     void run_loop();

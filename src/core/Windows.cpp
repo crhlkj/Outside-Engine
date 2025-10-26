@@ -85,7 +85,7 @@ void Windows::createWindow(int width, int height, const char *title)
         0.5f, -0.5f, 0.0f,
         0.0f, 0.5f, 0.0f
     };
-    unsigned int triangleIndices[] = {0, 1, 2};
+    unsigned int triangleIndices[] = {2, 1, 0};
 
     rendering.setupBuffers(triangleVertices, sizeof(triangleVertices),
                           triangleIndices, sizeof(triangleIndices));
@@ -108,7 +108,7 @@ void Windows::run_loop()
     imguiRender.BeginFrame();
 
     fpsCounter.Render();
-    // ImGui::ShowDemoWindow(); // Show demo window ImGui
+    ImGui::ShowDemoWindow(); // Show demo window ImGui
 
     imguiRender.EndFrame();
     glfwSwapBuffers(window);
