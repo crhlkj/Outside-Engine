@@ -10,6 +10,18 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(glfw)
 message(STATUS "Fetched GLFW from repository")
 
+# ===== GLM =====
+include(FetchContent)
+
+FetchContent_Declare(
+        glm
+        GIT_REPOSITORY https://github.com/g-truc/glm.git
+        GIT_TAG master
+)
+
+FetchContent_MakeAvailable(glm)
+message(STATUS "Fetched GLM from repository")
+
 # ===== GLAD =====
 add_library(glad STATIC ${PROJECT_SOURCE_DIR}/libs/glad/src/glad.c)
 target_include_directories(glad PUBLIC "${PROJECT_SOURCE_DIR}/libs/glad/include")
