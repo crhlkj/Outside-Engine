@@ -17,7 +17,8 @@ public:
     ~Shaders();
 
     static bool loadShader(const std::string& pathFile, std::string& shaderSource);
-    bool compileShader(GLenum type, const std::string& shaderSource, GLuint& shaderID);
+
+    static bool compileShader(GLenum type, const std::string& shaderSource, GLuint& shaderID);
     bool linkShaders();
     void use() const;
     void cleanup();

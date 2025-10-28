@@ -6,17 +6,19 @@
 class Rendering
 {
 private:
-    GLuint VAO, VBO, EBO;
+    GLuint VAO;
+    GLuint VBO;
+    GLuint EBO;
     GLuint shaderProgram;
 
 public:
     Rendering();
     ~Rendering();
 
-    void setupShader(std::string vertexShaderSource, std::string fragmentShaderSource, const std::string &vertexShaderPath, const std::string &fragmentShaderPath);
+    void setupShader(const std::string &vertexShaderPath, const std::string &fragmentShaderPath);
     void setupBuffers(float vertices[], size_t verticesSize, unsigned int indices[], size_t indicesSize);
 
-    void useShader(int indexCount) const;
+    void drawRender(int elemets) const;
     void cleanup();
 };
 

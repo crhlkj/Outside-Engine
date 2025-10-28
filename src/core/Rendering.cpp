@@ -7,30 +7,44 @@ Shaders shaders;
 Rendering::Rendering() : VAO(0), VBO(0), EBO(0), shaderProgram(0) { }
 Rendering::~Rendering() { cleanup(); }
 
-void Rendering::setupShader(std::string vertexShaderSource, std::string fragmentShaderSource, const std::string &vertexShaderPath, const std::string &fragmentShaderPath)
+void Rendering::setupShader(const std::string &vertexShaderPath, const std::string &fragmentShaderPath)
 {
-    if (Shaders::loadShader(vertexShaderPath, vertexShaderSource))
-    {
-        GLuint vertexShader = 0;
-        shaders.compileShader(GL_VERTEX_SHADER, vertexShaderSource, vertexShader);
+    std::string vertexShaderSource;
+    std::string fragmentShaderSource;
+
+    bool vertexSuccess = Shaders::loadShader(vertexShaderPath, vertexShaderSource);
+    bool fragmentSuccess = Shaders::loadShader(fragmentShaderPath, fragmentShaderSource);
+
+    if (!vertexSuccess || !fragmentSuccess) {
+        cleanup();
+        return;
     }
 
-    if (Shaders::loadShader(fragmentShaderPath, fragmentShaderSource))
-    {
-        GLuint fragmentShader = 0;
-        shaders.compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource, fragmentShader);
+    GLuint vertexShader = 0;
+    GLuint fragmentShader = 0;
+
+    if (!shaders.compileShader(GL_VERTEX_SHADER, vertexShaderSource, vertexShader)) {
+        cleanup();
+        return;
     }
 
-    if (shaders.linkShaders())
-    {
+    if (!shaders.compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource, fragmentShader)) {
+        glDeleteShader(vertexShader);
+        cleanup();
+        return;
+    }
+
+    if (shaders.linkShaders()) {
         shaders.use();
         shaderProgram = shaders.getID();
     }
-    else
-    {
+    else {
+        glDeleteShader(vertexShader);
+        glDeleteShader(fragmentShader);
         cleanup();
     }
 }
+
 void Rendering::setupBuffers(float vertices[], size_t verticesSize,
                             unsigned int indices[], size_t indicesSize) {
     glGenVertexArrays(1, &VAO);
@@ -52,11 +66,10 @@ void Rendering::setupBuffers(float vertices[], size_t verticesSize,
     glBindVertexArray(0);
 }
 
-void Rendering::useShader(int indexCount) const
-{
+void Rendering::drawRender(int elemets) const {
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, elemets, GL_UNSIGNED_INT, nullptr);
 }
 
 void Rendering::cleanup()

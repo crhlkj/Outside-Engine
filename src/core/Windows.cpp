@@ -33,9 +33,8 @@ Windows::~Windows()
 void Windows::setWindowIcon(GLFWwindow *window, const char *iconPath)
 {
     int width, height, channels;
-    unsigned char *data = stbi_load(iconPath, &width, &height, &channels, 4);
 
-    if (data)
+    if (unsigned char *data = stbi_load(iconPath, &width, &height, &channels, 4))
     {
         GLFWimage images[1];
         images[0].width = width;
@@ -65,7 +64,7 @@ void Windows::createWindow(int width, int height, const char *title)
     glfwMakeContextCurrent(this->window);
     glfwSwapInterval(1); // Enable vsync
 
-    setWindowIcon(this->window, "../../assets/logo_128x128.png");
+    setWindowIcon(this->window, "../../../assets/logo_128x128.png");
 
     if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
     {
@@ -101,7 +100,7 @@ void Windows::run_loop()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    rendering.useShader(3);
+    rendering.drawRender(3);
 
     glfwPollEvents();
     fpsCounter.Update();
@@ -114,7 +113,7 @@ void Windows::run_loop()
     glfwSwapBuffers(window);
 }
 
-GLFWwindow *Windows::getWindow() const
+GLFWwindow* Windows::getWindow() const
 {
     return window;
 }

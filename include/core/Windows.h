@@ -2,10 +2,11 @@
 #define OUTSIDE_WINDOWS_H
 
 #include <iostream>
-#include <GLFW/glfw3.h>
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include "../editor/ImguiRender.h"
 #include "../editor/PerformanceMonitor.h"
+
 #include "../../include/core/Rendering.h"
 #include "../../include/core/Shaders.h"
 

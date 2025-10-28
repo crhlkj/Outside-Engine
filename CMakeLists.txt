@@ -7,37 +7,33 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_subdirectory(libs)
 
-set(FILES_CORE
-        src/core/Windows.cpp
-        include/core/Windows.h
-        src/core/Rendering.cpp
-        include/core/Rendering.h
-        src/core/Shaders.cpp
-        include/core/Shaders.h
-)
-
-set(FILES_EDITOR
-        src/editor/ImguiRender.cpp
-        include/editor/ImguiRender.h
-        include/editor/PerformanceMonitor.h
-        src/editor/PerformanceMonitor.cpp
+file(GLOB FILES_OUTSIDE
+    ${PROJECT_SOURCE_DIR}/src/core/*.cpp
+    ${PROJECT_SOURCE_DIR}/src/editor/*.cpp
 )
 
 add_executable(Outside
         src/Outside.cpp
         include/Outside.h
-        ${FILES_CORE}
-        ${FILES_EDITOR}
+        ${FILES_OUTSIDE}
 )
 
 find_package(OpenGL REQUIRED)
 
 if(MSVC) # MSVC (Visual Studio)
-    target_compile_options(Outside PRIVATE /W0 /O2 /std:c++23 /RTC1) # /W0 .. /W4 - Info by error and warning
+    target_compile_options(Outside PRIVATE /W4 /O2 /std:c++23 /RTC1) # /W0 .. /W4 - Info by error and warning
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_compile_options(Outside PRIVATE -w -O2 -Wall -Wextra -std=c++23 -march=native -fcolor-diagnostics)
+    target_compile_options(Outside PRIVATE
+            -w -Wall -Wextra
+            -O2 -std=c++23
+            -march=native -fcolor-diagnostics
+    )
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_compile_options(Outside PRIVATE -w -O2 -Wall -Wextra -std=c++23 -march=native -fdiagnostics-color=always)
+    target_compile_options(Outside PRIVATE
+            -w -Wall -Wextra
+            -O2 -std=c++23
+            -march=native -fdiagnostics-color=always
+    )
 endif()
 
 target_include_directories(Outside PRIVATE ${PROJECT_SOURCE_DIR}/include)
